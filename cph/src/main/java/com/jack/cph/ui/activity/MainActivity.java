@@ -7,6 +7,9 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -236,12 +239,24 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 	}
 
 	private List<String> getAllUris() {
-		List<String> defaultUris = Arrays.asList(getResources().getStringArray(R.array.content_providers));
-		List<String> userUris = mDB.getAllUris();
-
         List<String> allUris = new ArrayList<String>();
-		allUris.addAll(defaultUris);
-		allUris.addAll(userUris);
+
+		List<String> defaultUris = Arrays.asList(getResources().getStringArray(R.array.content_providers));
+        allUris.addAll(defaultUris);
+
+		List<String> userUris = mDB.getAllUris();
+        allUris.addAll(userUris);
+
+//        List<String> installedUris = new ArrayList<String>();
+//        for (PackageInfo packageInfo : this.getPackageManager().getInstalledPackages(PackageManager.GET_PROVIDERS)) {
+//            if (packageInfo.providers != null) {
+//                for (ProviderInfo providerInfo : packageInfo.providers) {
+//                    installedUris.add(String.format("content://%s/", providerInfo.authority));
+//                }
+//            }
+//        }
+//        allUris.addAll(installedUris);
+
 		Collections.sort(allUris);
 
 		return allUris;
