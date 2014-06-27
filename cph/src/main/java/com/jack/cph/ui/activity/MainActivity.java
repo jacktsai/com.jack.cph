@@ -247,16 +247,6 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 		List<String> userUris = mDB.getAllUris();
         allUris.addAll(userUris);
 
-//        List<String> installedUris = new ArrayList<String>();
-//        for (PackageInfo packageInfo : this.getPackageManager().getInstalledPackages(PackageManager.GET_PROVIDERS)) {
-//            if (packageInfo.providers != null) {
-//                for (ProviderInfo providerInfo : packageInfo.providers) {
-//                    installedUris.add(String.format("content://%s/", providerInfo.authority));
-//                }
-//            }
-//        }
-//        allUris.addAll(installedUris);
-
 		Collections.sort(allUris);
 
 		return allUris;
